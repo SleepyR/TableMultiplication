@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Table </title>
+    <title>My First Task</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script>
+        function change(lang) {
+            document.getElementById("lang").innerHTML = lang;
+        }
+    </script>
 </head>
 <body>
-<div>
-    <form name="number" onsubmit="validateForm();return false;">
-        <div class="input">
-            Choose a number:
-            <input type="text" id="num1" name="num1">
-            Choose a number:
-            <input type="text" id="num2" name="num2">
+
+<header>
+    <div class="main">
+        <img src="http://eurnekian.codics.solutions/assets/images/logos/logo-navigation.png?fbclid=IwAR3FsGEjnBjgAvg_QOjpg8-rSevfcu_jkvS4DARqQVpFE4iMq25TBgJh0Vo">
+        <div class="menu">
+            <ul class="navbar">
+                <li class="dropdown">
+                    <div class="dropbtn">ՄԵՐ ՄԱՍԻՆ</div>
+                    <div class="dropdown-content">
+                        <a href="#">ԴՊՐՈՑԻ ՄԱՍԻՆ</a>
+                        <a hre="#">ՄԵՐ ԹԻՄԸ</a>
+                        <a href="#">ՍԱՆԵՐԻ ՀԱՋՈՂՈՒԹՅՈՒՆՆԵՐ</a>
+                        <a href="#">ԱՇԱԿԵՐՏԱԿԱՆ ԽՈՐՀՈՒՐԴ</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <div class="dropbtn">ԿՐԹՈՒԹՅՈՒՆ</div>
+                    <div class="dropdown-content">
+
+                    </div>
+                </li>
+                <li>ԸՆԴՈՒՆԵԼՈՒԹՅՈՒՆ</li>
+                <li>ՄՐՑՈՒՅԹՆԵՐ</li>
+                <li>ԿՅԱՆՔԸ ԴՊՐՈՑՈՒՄ</li>
+                <li>ԿԱՊ</li>
+                <li class="dropdown" style="background: rgb(224,224,224,0.85);">
+                    <div class="dropbtn" id="lang">Eng</div>
+                    <div class="dropdown-content">
+                        <a href="#">
+                            <div onclick="change(this.innerHTML)">Arm</div>
+                        </a>
+                        <a hre="#">
+                            <div onclick="change(this.innerHTML)">Ru</div>
+                        </a>
+                        <a href="#">
+                            <div onclick="change(this.innerHTML)">Eng</div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <input type="submit" value="Submit" class="submit">
-    </form>
-    <form action="">
-        <div class="buttons">
-            <div class="radios">
-                <input type="radio" name="mark" id="X" value="X" onclick="change();">
-                <label for="X">
-                    <span class="check"></span>
-                    X
-                </label>
-            </div>
-            <div class="radios">
-                <input type="radio" name="mark" id="3divide" value="3divide" onclick="change();">
-                <label for="3divide">
-                    <span class="check"></span>
-                    Divisors of 3
-                </label>
-            </div>
-            <div class="radios">
-                <input type="radio" name="mark" id="chess" value="Chess" onclick="change();">
-                <label for="chess">
-                    <span class="check"></span>
-                    Chess
-                </label>
-            </div>
-            <div class="radios">
-                <input type="radio" name="mark" id="none" value="None" onclick="change();">
-                <label for="none">
-                    <span class="check"></span>
-                    None
-                </label>
-            </div>
-        </div>
-    </form>
-</div>
+    </div>
+</header>
+
 </body>
 </html>
