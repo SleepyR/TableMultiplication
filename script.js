@@ -1,3 +1,11 @@
+window.addEventListener("click",myFunction);
+function myFunction(){
+    console.log(event.clientX + " " + event.clientY);
+}
+
+
+
+
 function validateForm() {
     let x = document.getElementById("num1").value;
     let y = document.getElementById("num2").value;
@@ -19,42 +27,34 @@ function validateForm() {
 
 }
 
+function createEl(str, cls) {
+    if (cls) {
+        let cl = document.createAttribute("class");
+        cl.value = cls;
+        let el = document.createElement(str);
+        el.setAttributeNode(cl);
+        return el;
+    } else {
+        return document.createElement(str);
+    }
+}
+
 function draw(x, y) {
-    let number = document.createElement("div");
+    let number = createEl("div", "table");
     for (let j = 0; j < y; j++) {
-        let ul = document.createElement("ul");
+        let li;
+        let ul = createEl("ul");
         for (let i = 0; i < x; i++) {
-            let li = document.createElement('li');
-            let cell = document.createElement('div');
-            let ccell = document.createAttribute("class");
-            ccell.value = "cell";
-            cell.setAttributeNode(ccell);
-            if (j === 0) {
-                let top = document.createElement('div');
-                let ctop = document.createAttribute("class");
-                ctop.value = "top";
-                top.setAttributeNode(ctop);
-                top.innerHTML = i + 1;
-                cell.appendChild(top);
-            } else if (i === 0) {
-                let top = document.createElement('div');
-                let ctop = document.createAttribute("class");
-                ctop.value = "top";
-                top.setAttributeNode(ctop);
-                top.innerHTML = j + 1;
+            let cell = createEl("div", "cell");
+            if (j === 0 || i == 0) {
+                li = createEl('li');
+                let top = createEl('div', "top");
+                top.innerHTML = i + j + 1;
                 cell.appendChild(top);
             } else {
-                let values = document.createAttribute("class");
-                values.value = "val";
-                li.setAttributeNode(values);
-                let front = document.createElement('div');
-                let fclass = document.createAttribute("class");
-                fclass.value = "front";
-                front.setAttributeNode(fclass);
-                let back = document.createElement('div');
-                let bclass = document.createAttribute("class");
-                bclass.value = "back";
-                back.setAttributeNode(bclass);
+                li = createEl('li', "val");
+                let front = createEl('div', "front");
+                let back = createEl('div', "back");
                 front.innerHTML = (i + 1) * (j + 1);
                 back.innerHTML = `${parseInt(i + 1)} X ${parseInt(j + 1)}`
                 cell.appendChild(front);
@@ -65,22 +65,22 @@ function draw(x, y) {
         }
         number.appendChild(ul);
     }
-    let att = document.createAttribute("class");
-    att.value = "table";
-    number.setAttributeNode(att);
     document.body.appendChild(number);
 }
 
 function change() {
     none();
-    if (document.getElementById("X").checked === true)
-        xChange();
-    else if (document.getElementById("3divide").checked === true)
-        div3Change();
-    else if (document.getElementById("none").checked === true)
-        none();
-    else if (document.getElementById("chess").checked === true)
-        chessChange();
+    switch (true) {
+        case document.getElementById("X").checked:
+            xChange();
+            break;
+        case document.getElementById("3divide").checked:
+            div3Change();
+            break;
+        case document.getElementById("chess").checked:
+            chessChange();
+            break;
+    }
 }
 
 
@@ -95,14 +95,13 @@ function none() {
             myCell[j].style.backgroundColor = "gold";
         }
     }
-    if(document.getElementsByClassName("table").length !== 0)
+    if (document.getElementsByClassName("table").length !== 0)
         document.getElementsByClassName("table")[0].classList.remove("n-table");
 }
 
 function xChange() {
     let myUl = document.getElementsByTagName("ul");
-    let myLis = document.getElementsByTagName("li");
-    let lenli = myLis.length;
+    let lenli = document.getElementsByTagName("li").length;
     let len = myUl.length;
     if (len === 2) {
         return;
@@ -119,22 +118,19 @@ function xChange() {
 function div3Change() {
     let myUl = document.getElementsByTagName("ul");
     let len = myUl.length;
+    let lenli = document.getElementsByTagName("li").length/len;
     if (len === 2) {
         return;
     }
     for (let i = 1; i < len; i++) {
         let myCell = myUl[i].getElementsByClassName("front");
         if ((i + 1) % 3 === 0) {
-            let myCell1 = myUl[i].getElementsByClassName("front");
-            for (let j = 0; j < myCell1.length; j++) {
-                myCell1[j].style.backgroundColor = "white";
+            for (let j = 0; j < lenli-1; j++) {
+                myCell[j].style.backgroundColor = "white";
             }
         } else {
-            for (let j = 0; j < myCell.length; j++) {
-                if ((j + 2) % 3 === 0) {
-                    let myCell1 = myCell[j];
-                    myCell1.style.backgroundColor = "white";
-                }
+            for (let j = 1; j <lenli-1; j+=3) {
+                myCell[j].style.backgroundColor = "white";
             }
         }
 
@@ -144,6 +140,6 @@ function div3Change() {
 function chessChange() {
     let chess = document.createAttribute("class");
     chess.value = "chess";
-    if(document.getElementsByClassName("table").length !== 0)
+    if (document.getElementsByClassName("table").length !== 0)
         document.getElementsByClassName("table")[0].classList.toggle("n-table");
 }
