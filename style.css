@@ -10,8 +10,6 @@ body{
 }
 
 .radios{
-    margin: 10px;
-    position: relative;
     padding-left: 30px;
     display: flex;
     width: 200px;
@@ -24,8 +22,8 @@ label{
     display:flex;
     justify-content:center;
     align-items:center;
-    margin: 0 20px;
-    width: 20px;
+    margin-right: 20px;
+    min-width: 20px;
     height: 20px;
     border: 1px solid yellow;
     border-radius: 100%;
@@ -42,13 +40,15 @@ label{
     height: 2px;
     border-radius: 100%;
     background: orangered;
-    transform:scale(7);
-    transition: transform 0.5s;
+    transform:scale(6);
+    transition: transform 0.3s;
 }
 
 .radios input{
     display: none;
 }
+
+
 .input{
     color: orange;
     font-weight: bold;
@@ -60,34 +60,30 @@ label{
     align-items: center;
     justify-content: space-between;
 }
-input{
+form input{
     color: orange;
     background-color: gold;
     width: 150px;
     height: auto;
     font-size:30px;
     padding: 20px 0;
+    transition: color 0.3s ease-in, background-color 0.3s ease-in;
 }
-input:hover{
+form input:hover{
     background-color: orange;
     color: gold;
-    transition: color 0.1s ease-in, background-color 0.1s ease-in;
-
 }
 .submit{
     border-radius: 50px;
     border: none;
     box-shadow: 1px 2px orange, 2px 1px orange;
 }
-
-
 .table
 {
     color: orangered;
     margin: 20px 20px;
     width: fit-content;
     display: flex;
-
 }
 .table ul{
     list-style: none;
@@ -102,9 +98,6 @@ input:hover{
     height: 50px;
     text-align: center;
     font-size: 25px;
-}
-.front, .back, .top{
-    box-shadow: 1px 2px 4px #CD853F	, 2px 1px 4px #CD853F;
 }
 
 .cell{
@@ -121,22 +114,22 @@ input:hover{
     color: gold;
     padding: 10px 0;
     background-color: #CD853F;
+    box-shadow: 1px 2px 4px #CD853F	, 2px 1px 4px #CD853F;
 }
-.front{
-    background-color: gold;
-    padding: 10px 0;
+.front,.back{
     position: absolute;
     width: 100%;
     backface-visibility: hidden;
+    padding: 10px 0;
+    box-shadow: 1px 2px 4px #CD853F	, 2px 1px 4px #CD853F;
+}
+.front{
+    background-color: gold;
     z-index: 2;
 }
 .back{
     background-color: orange;
-    padding: 10px 0;
     transform: rotateY(180deg);
-    position: absolute;
-    width: 100%;
-    backface-visibility: hidden;
     z-index: 1;
 }
 
@@ -145,4 +138,10 @@ input:hover{
 }
 .table.n-table > ul:nth-of-type(even) li:nth-of-type(even) .front {
     background-color: white!important;
+}
+
+
+.fairy{
+    transform: rotateY(180deg);
+    transition: transform 0.3s;
 }
