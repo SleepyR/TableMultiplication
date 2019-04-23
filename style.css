@@ -139,3 +139,8 @@ form input:hover{
 .table.n-table > ul:nth-of-type(even) li:nth-of-type(even) .front {
     background-color: white!important;
 }
+
+.fairy{
+    transform: rotateY(180deg);
+    transition: transform 0.3s;
+}

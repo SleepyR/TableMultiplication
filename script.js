@@ -1,9 +1,27 @@
-window.addEventListener("click",myFunction);
-function myFunction(){
+window.addEventListener("click", myFunction);
+
+function myFunction() {
     console.log(event.clientX + " " + event.clientY);
 }
 
 
+$(document).ready(function(){
+    $("*").click(function(event){
+        let myImg = $("#figure");
+        if(myImg.position().left===8) {
+            myImg.animate({left: event.pageX-30});
+            myImg.animate({top: event.pageY-30});
+            myImg.css("visibility", "visible");
+        }
+        else{
+            myImg.animate({left: event.pageX-30, top:event.pageY-30});
+        }
+        if(event.pageX<myImg.position().left)
+            myImg.addClass("fairy");
+        else myImg.removeClass("fairy");
+
+    });
+});
 
 
 function validateForm() {
@@ -99,6 +117,12 @@ function none() {
         document.getElementsByClassName("table")[0].classList.remove("n-table");
 }
 
+
+function bgcolor(str, obj) {
+    obj.style.backgroundColor = "white";
+}
+
+
 function xChange() {
     let myUl = document.getElementsByTagName("ul");
     let lenli = document.getElementsByTagName("li").length;
@@ -109,28 +133,28 @@ function xChange() {
     let index = Math.min(lenli / len, len);
     for (let i = 1; i < index; i++) {
         let myCell1 = myUl[i].getElementsByClassName("front")[i - 1];
-        myCell1.style.backgroundColor = "white";
+        bgcolor("white", myCell1);
         let myCell2 = myUl[i].getElementsByClassName("front")[index - i - 1];
-        myCell2.style.backgroundColor = "white";
+        bgcolor("white", myCell2);
     }
 }
 
 function div3Change() {
     let myUl = document.getElementsByTagName("ul");
     let len = myUl.length;
-    let lenli = document.getElementsByTagName("li").length/len;
+    let lenli = document.getElementsByTagName("li").length / len;
     if (len === 2) {
         return;
     }
     for (let i = 1; i < len; i++) {
         let myCell = myUl[i].getElementsByClassName("front");
         if ((i + 1) % 3 === 0) {
-            for (let j = 0; j < lenli-1; j++) {
-                myCell[j].style.backgroundColor = "white";
+            for (let j = 0; j < lenli - 1; j++) {
+                bgcolor("white", myCell[j]);
             }
         } else {
-            for (let j = 1; j <lenli-1; j+=3) {
-                myCell[j].style.backgroundColor = "white";
+            for (let j = 1; j < lenli - 1; j += 3) {
+                bgcolor("white", myCell[j]);
             }
         }
 
