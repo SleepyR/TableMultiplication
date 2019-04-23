@@ -140,7 +140,6 @@ form input:hover{
     background-color: white!important;
 }
 
-
 .fairy{
     transform: rotateY(180deg);
     transition: transform 0.3s;
