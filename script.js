@@ -1,27 +1,54 @@
-window.addEventListener("click", myFunction);
-
-function myFunction() {
-    console.log(event.clientX + " " + event.clientY);
-}
-
-
-$(document).ready(function(){
-    $("*").click(function(event){
-        let myImg = $("#figure");
+$(document).ready(function () {
+    $("*").click(function (event) {
+        let myImg = $("#image");
         if(myImg.position().left===8) {
+            animateScriptS(0,360);
             myImg.animate({left: event.pageX-30});
             myImg.animate({top: event.pageY-30});
             myImg.css("visibility", "visible");
         }
-        else{
-            myImg.animate({left: event.pageX-30, top:event.pageY-30});
-        }
-        if(event.pageX<myImg.position().left)
-            myImg.addClass("fairy");
-        else myImg.removeClass("fairy");
+        else if(event.pageX<myImg.position().left)
+            animateScript(0, 180);
+        else if(event.pageX>myImg.position().left)
+            animateScript(0 , 360);
+        myImg.animate({left: event.pageX-30, top:event.pageY-30});
+
 
     });
 });
+
+
+var tID;
+
+function animateScript(positionx,positiony) {
+    clearInterval(tID);
+    tID = setInterval(() => {
+            document.getElementById("image").style.backgroundPosition = `-${positionx}px -${positiony}px`;
+            if (positionx <= 540) {
+                positionx = positionx + 180;
+            } else {
+                positionx = 180;
+            }
+        }
+        , 100);
+
+}
+function animateScriptS(positionx,positiony) {
+    clearInterval(tID);
+
+    tID = setInterval(() => {
+            document.getElementById("image").style.backgroundPosition = `-${positionx}px -${positiony}px`;
+            if (positionx <= 540) {
+                positionx = positionx + 180;
+            } else {
+                positionx = 180;
+            }
+        }
+        , 100);
+
+}
+
+
 
 
 function validateForm() {
@@ -167,3 +194,4 @@ function chessChange() {
     if (document.getElementsByClassName("table").length !== 0)
         document.getElementsByClassName("table")[0].classList.toggle("n-table");
 }
+
