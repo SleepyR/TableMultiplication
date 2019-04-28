@@ -31,16 +31,6 @@ function animateScript(positionx,positiony) {
             }
         }
         , 100);
-    clearInterval(tID);
-    tID = setInterval(() => {
-            document.getElementById("image").style.backgroundPosition = `-${0}px -${0}px`;
-            if (positionx <= 540) {
-                positionx = positionx + 180;
-            } else {
-                positionx = 180;
-            }
-        }
-        , 100);
 
 }
 
