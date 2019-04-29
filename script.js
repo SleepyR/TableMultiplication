@@ -1,27 +1,39 @@
 $(document).ready(function () {
     $("*").click(function (event) {
         let myImg = $("#image");
-        if(myImg.position().left===8) {
+
+        if(myImg.css("display")==="none") {
             animateScript(0,360);
-            myImg.animate({left: event.pageX-30});
-            myImg.animate({top: event.pageY-30});
-            myImg.css("visibility", "visible");
+            myImg.animate({left: event.pageX-30},1000);
+            myImg.animate({top: event.pageY-30},1000);
+            myImg.css("display", "block");
+
         }
-        else if(event.pageX<myImg.position().left)
-            animateScript(0, 180);
-        else if(event.pageX>myImg.position().left)
-            animateScript(0 , 360);
-        myImg.animate({left: event.pageX-30, top:event.pageY-30});
+        else{
+            console.log(event.pageX-myImg.position().left);
+            if(Math.abs(event.pageX-myImg.position().left)<200 && event.pageY>myImg.position().top)
+                animateScript(0 , 540);
+            else if(Math.abs(event.pageX-myImg.position().left)<200 && event.pageY<myImg.position().top)
+                animateScript(0 , 0);
+            else if(event.pageX<myImg.position().left)
+                animateScript(0, 180);
+            else if(event.pageX>myImg.position().left)
+                animateScript(0 , 360);
+            myImg.animate({left: event.pageX-30, top:event.pageY-30},2000);
+
+        }
 
 
     });
 });
 
 
-var tID;
+var tID, move;
 
 function animateScript(positionx,positiony) {
+    clearTimeout(move);
     clearInterval(tID);
+
     tID = setInterval(() => {
             document.getElementById("image").style.backgroundPosition = `-${positionx}px -${positiony}px`;
             if (positionx <= 540) {
@@ -31,9 +43,21 @@ function animateScript(positionx,positiony) {
             }
         }
         , 100);
+    move = setTimeout(moveF, 2000);
 
 }
-
+function moveF() {
+    let positionx = 0;
+    clearInterval(tID);
+    move = setInterval(() => {
+    document.getElementById("image").style.backgroundPosition = `-${positionx}px -${0}px`;
+    if (positionx <= 540) {
+        positionx = positionx + 180;
+    } else {
+        positionx = 180;
+    }
+}, 100);
+}
 
 
 
