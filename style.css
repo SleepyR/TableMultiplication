@@ -140,10 +140,8 @@ form input:hover{
     background-color: white!important;
 }
 
-
-.fairy{
-    transform: rotateY(180deg);
-    transition: transform 0.3s;
+.move{
+    left: 250px;
 }
 
 #image {
@@ -151,13 +149,20 @@ form input:hover{
     height: 180px;
     width: 180px;
     background: url('https://orig03.deviantart.net/2604/f/2016/025/a/9/rpg_maker_mv_harpy_spritesheet_by_adanrayen-d9papb3.png') 0px 0px;
-    visibility: hidden;    
+    display: none;
     z-index: 3;
-
-
+    transition: left 0.3s linear, top 0.3s linear;
 }
 
-/*@keyframes fly{*/
-/*    from {left:0px}*/
-/*    to{left: 1200px}*/
-/*}*/
+
+
+
+
+
+
+
+
+
+
+
+
