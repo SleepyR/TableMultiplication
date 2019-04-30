@@ -36,11 +36,11 @@ label{
 }
 
 .radios input:checked + label .check:after{
-    width: 2px;
-    height: 2px;
-    border-radius: 100%;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
     background: orangered;
-    transform:scale(6);
+    transform:scale(5);
     transition: transform 0.3s;
 }
 
@@ -151,16 +151,36 @@ form input:hover{
     background: url('https://orig03.deviantart.net/2604/f/2016/025/a/9/rpg_maker_mv_harpy_spritesheet_by_adanrayen-d9papb3.png') 0px 0px;
     display: none;
     z-index: 3;
-    transition: left 0.3s linear, top 0.3s linear;
+    transition: left 1s linear, top 1s linear;
 }
 
 
-
-
-
-
-
-
+.fly{
+    animation: fly 1s steps(3) alternate infinite;
+}
+.left{
+    background-position: 0px -180px;
+    animation: left 1s steps(3) alternate infinite;
+}
+.rigth{
+    background-position: 0px -360px;
+    animation: right 1s steps(3) alternate infinite;
+}
+.back{
+    animation: back 1s steps(3) alternate infinite;
+}
+@keyframes fly {
+    100% {background-position-x: -540px;}
+}
+@keyframes left {
+    100% {background-position-x: -540px}
+}
+@keyframes right {
+    100% {background-position-x: -540px}
+}
+@keyframes back {
+    100% {background-position: -540px -540px;}
+}
 
 
 
