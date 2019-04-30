@@ -1,65 +1,44 @@
+var tID, move;
+var direction = 0;
+
 $(document).ready(function () {
     $("*").click(function (event) {
         let myImg = $("#image");
-
-        if(myImg.css("display")==="none") {
-            animateScript(0,360);
-            myImg.animate({left: event.pageX-30},1000);
-            myImg.animate({top: event.pageY-30},1000);
-            myImg.css("display", "block");
-
+        myImg.css({left: 0});
+        myImg.css({top: 0});
+        myImg.css("display", "block");
+        if (myImg.position().left === 0) {
+            myImg.addClass("fly");
+            myImg.css({left: event.pageX - 80});
+            setTimeout(myImg.css({top: event.pageY - 80}),2000);
+        } else {
+                if (event.pageX < myImg.position().left){
+                    myImg.removeClass("fly");
+                    myImg.addClass("left");
+                }
+                else if (event.pageX > myImg.position().left){
+                    myImg.removeClass("fly");
+                    myImg.addClass("right");
+                }
+            myImg.css({left: event.pageX - 80, top: event.pageY - 80});
         }
-        else{
-            console.log(event.pageX-myImg.position().left);
-            if(Math.abs(event.pageX-myImg.position().left)<200 && event.pageY>myImg.position().top)
-                animateScript(0 , 540);
-            else if(Math.abs(event.pageX-myImg.position().left)<200 && event.pageY<myImg.position().top)
-                animateScript(0 , 0);
-            else if(event.pageX<myImg.position().left)
-                animateScript(0, 180);
-            else if(event.pageX>myImg.position().left)
-                animateScript(0 , 360);
-            myImg.animate({left: event.pageX-30, top:event.pageY-30},2000);
-
-        }
-
-
     });
 });
 
-
-var tID, move;
-
-function animateScript(positionx,positiony) {
-    clearTimeout(move);
-    clearInterval(tID);
-
+let fly = 1;
+function animateScript(positionx) {
     tID = setInterval(() => {
-            document.getElementById("image").style.backgroundPosition = `-${positionx}px -${positiony}px`;
-            if (positionx <= 540) {
+            document.getElementById("image").style.backgroundPosition = `-${positionx}px -${direction * 180}px`;
+            if (positionx < 540 && fly===1) {
                 positionx = positionx + 180;
-            } else {
-                positionx = 180;
+            } else if(positionx>0){
+                fly = 0;
+                positionx = positionx - 180;
             }
+            else fly =1;
         }
         , 100);
-    move = setTimeout(moveF, 2000);
-
 }
-function moveF() {
-    let positionx = 0;
-    clearInterval(tID);
-    move = setInterval(() => {
-    document.getElementById("image").style.backgroundPosition = `-${positionx}px -${0}px`;
-    if (positionx <= 540) {
-        positionx = positionx + 180;
-    } else {
-        positionx = 180;
-    }
-}, 100);
-}
-
-
 
 
 function validateForm() {
@@ -102,7 +81,7 @@ function draw(x, y) {
         let ul = createEl("ul");
         for (let i = 0; i < x; i++) {
             let cell = createEl("div", "cell");
-            if (j === 0 || i == 0) {
+            if (j === 0 || i === 0) {
                 li = createEl('li');
                 let top = createEl('div', "top");
                 top.innerHTML = i + j + 1;
