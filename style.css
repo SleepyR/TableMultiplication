@@ -148,7 +148,7 @@ form input:hover{
     display: none;
     z-index: 3;
     transition: transform 1s linear;
-    animation: fly 1s steps(3) alternate infinite;
+    animation: fly 0.3s steps(3) alternate infinite;
 }
 
 
