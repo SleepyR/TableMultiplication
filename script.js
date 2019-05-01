@@ -1,44 +1,34 @@
-var tID, move;
-var direction = 0;
-
+var positionx = 0,positiony = 0;
 $(document).ready(function () {
-    $("*").click(function (event) {
+    $(document).click(function (event) {
         let myImg = $("#image");
-        myImg.css({left: 0});
-        myImg.css({top: 0});
-        myImg.css("display", "block");
-        if (myImg.position().left === 0) {
+        if (myImg.css("display") === "none") {
             myImg.addClass("fly");
-            myImg.css({left: event.pageX - 80});
-            setTimeout(myImg.css({top: event.pageY - 80}),2000);
-        } else {
-                if (event.pageX < myImg.position().left){
-                    myImg.removeClass("fly");
-                    myImg.addClass("left");
-                }
-                else if (event.pageX > myImg.position().left){
-                    myImg.removeClass("fly");
-                    myImg.addClass("right");
-                }
-            myImg.css({left: event.pageX - 80, top: event.pageY - 80});
+            myImg.css({display:"block"});
+            setTimeout(() => myImg.css("transform", "translate("+(event.pageX-80)+"px"),100);
+            setTimeout(() => myImg.css("transform", "translate("+(event.pageX-80)+"px,"+(event.pageY-80)+"px)"),1000);
+        }else {
+            if(Math.abs(event.pageX-positionx)<200 && event.pageY<positiony) {
+                myImg.removeClass("fly");
+                myImg.addClass("back");
+                setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
+            }
+            else if (event.pageX < positionx+80){
+                myImg.removeClass("fly");
+                myImg.addClass("left");
+                setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
+            }
+            else if (event.pageX > positionx+80){
+                myImg.removeClass("fly");
+                myImg.addClass("right");
+                setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
+            }
+            myImg.css("transform", "translate("+(event.pageX-80)+"px,"+(event.pageY-80)+"px)");
         }
+        positionx = event.pageX;
+        positiony = event.pageY;
     });
 });
-
-let fly = 1;
-function animateScript(positionx) {
-    tID = setInterval(() => {
-            document.getElementById("image").style.backgroundPosition = `-${positionx}px -${direction * 180}px`;
-            if (positionx < 540 && fly===1) {
-                positionx = positionx + 180;
-            } else if(positionx>0){
-                fly = 0;
-                positionx = positionx - 180;
-            }
-            else fly =1;
-        }
-        , 100);
-}
 
 
 function validateForm() {
