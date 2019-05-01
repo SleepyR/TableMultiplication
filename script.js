@@ -1,4 +1,4 @@
-var positionx = 0,positiony = 0, tID;
+var tID;
 $(document).ready(function () {
     $(document).click(function (event) {
         let myImg = $("#image");
@@ -10,25 +10,23 @@ $(document).ready(function () {
             tID = setTimeout(() => myImg.css({transform:"translate("+(event.pageX-80)+"px)"}),100);
             tID = setTimeout(() => myImg.css({transform: "translate("+(event.pageX-80)+"px,"+(event.pageY-80)+"px)"}),1000);
         }else {
-            if(Math.abs(event.pageX-positionx)<200 && event.pageY<positiony) {
+            if(Math.abs(event.pageX-myImg.position().left)<200 && event.pageY<myImg.position().top) {
                 myImg.removeClass("fly");
                 myImg.addClass("back");
                 tID = setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
             }
-            else if (event.pageX < positionx+80){
+            else if (event.pageX < myImg.position().left+80){
                 myImg.removeClass("fly");
                 myImg.addClass("left");
                 tID = setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
             }
-            else if (event.pageX > positionx+80){
+            else if (event.pageX > myImg.position().left+80){
                 myImg.removeClass("fly");
                 myImg.addClass("right");
                 tID = setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
             }
             myImg.css("transform", "translate("+(event.pageX-80)+"px,"+(event.pageY-80)+"px)");
         }
-        positionx = event.pageX;
-        positiony = event.pageY;
     });
 });
 
