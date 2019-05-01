@@ -1,5 +1,5 @@
 body{
-    background: peachpuff;
+    background-color: peachpuff;
 }
 .buttons{
     color: #dc7521;
@@ -116,18 +116,18 @@ form input:hover{
     background-color: #CD853F;
     box-shadow: 1px 2px 4px #CD853F	, 2px 1px 4px #CD853F;
 }
-.front,.back{
+.cell .front,.cell .back{
     position: absolute;
     width: 100%;
     backface-visibility: hidden;
     padding: 10px 0;
     box-shadow: 1px 2px 4px #CD853F	, 2px 1px 4px #CD853F;
 }
-.front{
+.cell .front{
     background-color: gold;
     z-index: 2;
 }
-.back{
+.cell .back{
     background-color: orange;
     transform: rotateY(180deg);
     z-index: 1;
@@ -140,49 +140,32 @@ form input:hover{
     background-color: white!important;
 }
 
-.move{
-    left: 250px;
-}
-
 #image {
     position: absolute;
     height: 180px;
     width: 180px;
-    background: url('https://orig03.deviantart.net/2604/f/2016/025/a/9/rpg_maker_mv_harpy_spritesheet_by_adanrayen-d9papb3.png') 0px 0px;
+    background: url('https://orig03.deviantart.net/2604/f/2016/025/a/9/rpg_maker_mv_harpy_spritesheet_by_adanrayen-d9papb3.png') 0 0;
     display: none;
     z-index: 3;
-    transition: left 1s linear, top 1s linear;
-}
-
-
-.fly{
+    transition: transform 1s linear;
     animation: fly 1s steps(3) alternate infinite;
 }
-.left{
-    background-position: 0px -180px;
-    animation: left 1s steps(3) alternate infinite;
+
+
+#image.fly{
+    background-position: 0 0;
 }
-.rigth{
-    background-position: 0px -360px;
-    animation: right 1s steps(3) alternate infinite;
+#image.left{
+    background-position-y: -180px;
 }
-.back{
-    animation: back 1s steps(3) alternate infinite;
+#image.right{
+    background-position-y: -360px;
+}
+#image.back{
+    background-position-y: -540px;
 }
 @keyframes fly {
     100% {background-position-x: -540px;}
 }
-@keyframes left {
-    100% {background-position-x: -540px}
-}
-@keyframes right {
-    100% {background-position-x: -540px}
-}
-@keyframes back {
-    100% {background-position: -540px -540px;}
-}
-
-
-
 
 
