@@ -1,27 +1,29 @@
-var positionx = 0,positiony = 0;
+var positionx = 0,positiony = 0, tID;
 $(document).ready(function () {
     $(document).click(function (event) {
         let myImg = $("#image");
+        myImg.removeClass();
+        clearTimeout(tID);
         if (myImg.css("display") === "none") {
             myImg.addClass("fly");
             myImg.css({display:"block"});
-            setTimeout(() => myImg.css("transform", "translate("+(event.pageX-80)+"px"),100);
-            setTimeout(() => myImg.css("transform", "translate("+(event.pageX-80)+"px,"+(event.pageY-80)+"px)"),1000);
+            tID = setTimeout(() => myImg.css({transform:"translate("+(event.pageX-80)+"px)"}),100);
+            tID = setTimeout(() => myImg.css({transform: "translate("+(event.pageX-80)+"px,"+(event.pageY-80)+"px)"}),1000);
         }else {
             if(Math.abs(event.pageX-positionx)<200 && event.pageY<positiony) {
                 myImg.removeClass("fly");
                 myImg.addClass("back");
-                setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
+                tID = setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
             }
             else if (event.pageX < positionx+80){
                 myImg.removeClass("fly");
                 myImg.addClass("left");
-                setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
+                tID = setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
             }
             else if (event.pageX > positionx+80){
                 myImg.removeClass("fly");
                 myImg.addClass("right");
-                setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
+                tID = setTimeout(() => {myImg.removeClass(); myImg.addClass("fly");},1000);
             }
             myImg.css("transform", "translate("+(event.pageX-80)+"px,"+(event.pageY-80)+"px)");
         }
